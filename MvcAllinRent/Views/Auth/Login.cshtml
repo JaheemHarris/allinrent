@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alice&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>All-In-Rent: @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="login-container">
+            <h1 class="login-title">All-In-Rent.</h1>
+            <div class="login-content">
+                <h2 class="login-label">Connectez-vous</h2>
+                <p class="login-paragraph">Connectez-vous et commencez à louer ce dont vous avez besoin</p>
+                <form class="login-form" method="POST" asp-controller="Auth" asp-action="Login">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Email</span>
+                            <input class="input-field" type="email" name="email" placeholder="example@mail.com" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Mot de passe</span>
+                            <input class="input-field" type="password" name="password" placeholder="******" required />
+                        </div>
+                    </div>
+                    <button class="action-btn" type="submit">Se connecter</button>
+                </form>
+                <p>Vous n'avez pas encore de compte ? <a asp-area="" asp-controller="Auth" asp-action="Register">Créez-en un!</a></p>
+            </div>
+            <span>All-In-Rent &copy; 2024 </span>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

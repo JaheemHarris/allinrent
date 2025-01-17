@@ -1,0 +1,70 @@
+﻿@page
+@model RazorAllinRent.Pages.Items.CreateModel
+
+@{
+    ViewData["Title"] = "Création article";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Créer un article</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Article</li>
+                <li class="breadcrumb-item active">Créer</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ajouter un nouvel article</h5>
+                        <!-- Horizontal Form -->
+                        <div class="row justify-content-center">
+                            <form class="col-md-8 col-sm-12 pb-4" method="POST" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="CreateItemDto.ItemTypeId" class="control-label"></label>
+                                    <select asp-for="CreateItemDto.ItemTypeId" class="form-control" asp-items="ViewBag.ItemTypeId"></select>
+                                    <span asp-validation-for="CreateItemDto.ItemTypeId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CreateItemDto.Name" class="control-label"></label>
+                                    <input asp-for="CreateItemDto.Name" class="form-control" />
+                                    <span asp-validation-for="CreateItemDto.Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CreateItemDto.Description" class="control-label"></label>
+                                    <input asp-for="CreateItemDto.Description" class="form-control" />
+                                    <span asp-validation-for="CreateItemDto.Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CreateItemDto.ImageFile"></label>
+                                    <input asp-for="CreateItemDto.ImageFile" type="file" class="form-control-file" />
+                                    <span asp-validation-for="CreateItemDto.ImageFile" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CreateItemDto.RentalFee" class="control-label"></label>
+                                    <input asp-for="CreateItemDto.RentalFee" class="form-control" />
+                                    <span asp-validation-for="CreateItemDto.RentalFee" class="text-danger"></span>
+                                </div>
+                                <div class="text-center">
+                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

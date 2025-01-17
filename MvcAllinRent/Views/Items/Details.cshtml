@@ -1,0 +1,93 @@
+﻿@model MvcAllinRent.Models.Item
+
+@{
+    ViewData["Title"] = "Détails article";
+}
+<div class="modal fade" id="rentItemModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="Location Article" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" method="POST" asp-action="Rent" asp-controller="Rentals">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Location</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="ItemId" value="@Model.Id" hidden/>
+                <div class="mb-3">
+                    <label for="item" class="form-label">Article</label>
+                    <input type="text" class="form-control" id="item" value="@Model.Name" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="rentalFee" class="form-label">Montant de location par jour</label>
+                    <input type="text" class="form-control" id="rentalFee" value="@Model.RentalFee Ar" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantité</label>
+                    <input type="number" class="form-control" name="quantity" id="quantity">
+                </div>
+                <div class="mb-3">
+                    <label for="locationDate" class="form-label">Date de location</label>
+                    <input type="date" class="form-control" name="locationDate" id="locationDate">
+                </div>
+                <div class="mb-3">
+                    <label for="dueDate" class="form-label">À rendre le</label>
+                    <input type="date" class="form-control" name="dueDate" id="dueDate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="page-content">
+    <h1 class="page-title">Détails de l'article</h1>
+    <div class="detail-container">
+        @if(String.IsNullOrEmpty(Model.ImageFile))
+        {
+            <div class="image-container">
+                <img class="item-image" src="/shared-images/image-not-found.jpg" />
+            </div>
+        }
+        else
+        {
+            <div class="image-container">
+                <img class="item-image" src="/shared-images/@Model.ImageFile" />
+            </div>
+        }
+
+        <div class="detail-content">
+            <h2 class="article-name">@Html.DisplayFor(modelItem => modelItem.Name)</h2>
+            <div class="item-details">
+                <div class="item-info">
+                    <span class="info-label">@Html.DisplayNameFor(model => model.Name)</span>
+                    <span class="info-value">@Html.DisplayFor(modelItem => modelItem.Name)</span>
+                </div>
+                <div class="item-info">
+                    <span class="info-label">@Html.DisplayNameFor(model => model.ItemTypeName)</span>
+                    <span class="info-value">@Html.DisplayFor(modelItem => modelItem.ItemTypeName)</span>
+                </div>
+                <div class="item-info">
+                    <span class="info-label">@Html.DisplayNameFor(model => model.Description)</span>
+                    <span class="info-value">@Html.DisplayFor(modelItem => modelItem.Description)</span>
+                </div>
+                <div class="item-info">
+                    <span class="info-label">@Html.DisplayNameFor(model => model.RentalFee)</span>
+                    <span class="info-value">@Html.DisplayFor(modelItem => modelItem.RentalFee) Ar</span>
+                </div>
+            </div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <button class="rent-btn" id="openModalBtn">Faire la location de l'article</button>
+            } else
+            {
+            <div class="rent-login-action">
+                <p>Veuillez vous connecter pour pouvoir louer cet article.</p>
+                <a asp-action="Login" asp-controller="Auth">Se connecter</a>
+            </div>
+            }
+        </div>
+    </div>
+</div>

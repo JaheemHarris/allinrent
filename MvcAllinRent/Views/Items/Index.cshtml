@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "Articles";
+}
+
+<style>
+    .item-img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+
+    .items-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+        gap: 24px;
+    }
+
+    .pagination-btn {
+        cursor: pointer;
+    }
+
+    .form-field {
+        gap: 14px;
+    }
+
+    #itemsGrid {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .item-card-content {
+        height: 100%;
+    }
+
+</style>
+
+<div class="page-content">
+    <h1 class="page-title">Articles à louer</h1>
+
+    <div class="items-container">
+        <form class="row justify-content-center" id="searchForm">
+            <div class="col-5 d-flex align-center form-field">
+                <input type="text" id="searchQuery" class="form-control" placeholder="Rechercher par nom d'article..." />
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+
+        <!-- Items Grid -->
+        <div id="itemsGrid" class="row row-cols-1 row-cols-md-3 mt-4">
+            <!-- Items will be inserted here dynamically -->
+        </div>
+    </div>
+    
+
+    <!-- Pagination -->
+    <nav aria-label="Pagination">
+        <ul id="pagination" class="pagination justify-content-center">
+            <!-- Pagination buttons will be inserted here dynamically -->
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+    <script>
+        // Function to fetch items and update the grid
+        function fetchItems(page = 1, pageSize = 6, search = '') {
+            fetch(`/api/items?pageNumber=${page}&pageSize=${pageSize}&q=${search}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Render the items in the grid
+                    renderItems(data.items);
+
+                    // Render pagination
+                    renderPagination(data.totalCount, pageSize, page);
+                })
+                .catch(error => console.error('Error fetching items:', error));
+        }
+
+        // Function to render items in the grid
+        function renderItems(items) {
+            const itemsGrid = document.getElementById('itemsGrid');
+            itemsGrid.innerHTML = '';  // Clear previous items
+
+            items.forEach(item => {
+                const itemCard = `
+                    <div class="card" style="max-width: 540px;">
+                      <div class="row justify-content-between item-card-content">
+                        <div class="col-md-6 m-0 p-0">
+                            <img class="item-img" src="/shared-images/${item.imageFile ? item.imageFile : 'image-not-found.jpg'}" alt="${item.name}">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body d-flex flex-column h-100 justify-content-between">
+                            <div class="d-flex flex-column">
+                                <h5 class="card-title">${item.name}</h5>
+                                <p>${item.description}</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-outline-primary" href="/Items/Details/${item.id}">Voir</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                `;
+                itemsGrid.innerHTML += itemCard;
+            });
+        }
+
+        // Function to render pagination
+        function renderPagination(totalCount, pageSize, currentPage) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';  // Clear previous pagination
+
+            const totalPages = Math.ceil(totalCount / pageSize);
+
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                const isActive = pageNum === currentPage ? 'active' : '';
+                const pageLink = `
+                    <li class="page-item ${isActive}">
+                        <span class="page-link pagination-btn" href="#" onclick="onPageChange(${pageNum})">${pageNum}</span>
+                    </li>
+                `;
+                pagination.innerHTML += pageLink;
+            }
+        }
+
+        // Function to handle page change
+        function onPageChange(pageNum) {
+            const searchQuery = document.getElementById('searchQuery').value;
+            fetchItems(pageNum, 6, searchQuery);  // Adjust pageSize if needed
+        }
+
+        // Handle search form submission
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault();  // Prevent form from submitting the default way
+            const searchQuery = document.getElementById('searchQuery').value;
+            fetchItems(1, 6, searchQuery);  // Reset to page 1 on search
+        });
+
+        // Initial fetch (default to page 1 and empty search query)
+        fetchItems(1, 6, '');
+    </script>
+}

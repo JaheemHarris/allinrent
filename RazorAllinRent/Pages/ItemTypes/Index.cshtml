@@ -1,0 +1,61 @@
+﻿@page
+@model RazorAllinRent.Pages.ItemTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Type d'article";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste des types d'article</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Types</a></li>
+                <li class="breadcrumb-item active">Liste</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Liste des types d'article</h5>
+                        <div class="d-flex justify-content-end">
+                            <a class="btn btn-success" asp-page="./Import">Importer CSV</a>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.ItemType[0].Label)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.ItemType[0].IsActive)</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var itemType in Model.ItemType) {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => itemType.Label)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => itemType.IsActive)
+                                        </td>
+                                        <td>
+                                            <a asp-page="./Edit" asp-route-id="@itemType.Id">Modifier</a> |
+                                            <a asp-page="./Details" asp-route-id="@itemType.Id">Détails</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- End #main -->

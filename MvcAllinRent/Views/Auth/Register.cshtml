@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Inscription";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alice&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>All-In-Rent: @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="register-container">
+            <h1 class="register-title">All-In-Rent.</h1>
+            <div class="register-content">
+                <h2 class="register-label">Création de compte</h2>
+                <p class="register-paragraph">Créez votre compte et commencez à louer ce dont vous avez besoin</p>
+                <form class="register-form" method="POST" asp-controller="Auth" asp-action="Register">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Nom</span>
+                            <input class="input-field" type="text" name="firstname" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Prénom</span>
+                            <input class="input-field" type="text" name="lastname" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Email</span>
+                            <input class="input-field" type="email" name="email" placeholder="example@mail.com" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Numéro de téléphone</span>
+                            <input class="input-field" type="text" name="phonenumber" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Numéro CIN</span>
+                            <input class="input-field" type="text" name="idnumber" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Mot de passe</span>
+                            <input class="input-field" type="password" name="password" placeholder="******" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-label">Confirmez votre mot de passe</span>
+                            <input class="input-field" type="password" name="confirmpassword" placeholder="******" required />
+                        </div>
+                    </div>
+                    <button class="action-btn" type="submit">Créer</button>
+                </form>
+                <p>Vous avez déjà un compte ? <a asp-area="" asp-controller="Auth" asp-action="Login">Connectez-vous ici!</a></p>
+            </div>
+            <span>All-In-Rent &copy; 2024 </span>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

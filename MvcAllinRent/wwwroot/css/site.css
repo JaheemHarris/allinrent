@@ -1,0 +1,265 @@
+:root {
+  font-size: 14px;
+  font-family: "League Spartan", serif, sans-serif;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+        font-family: "League Spartan", serif, sans-serif;
+    }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-family: "League Spartan", serif, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "League Spartan", serif, sans-serif;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.my-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 12px 24px 0px;
+  background: linear-gradient(rgb(243, 243, 243) 0%, rgb(255, 255, 255) 99.38%);
+}
+
+.my-navbar .site-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #0097b2;
+  text-decoration: none;
+  font-family: "League Spartan", serif, sans-serif;
+}
+
+.my-navbar .links-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 32px;
+}
+
+.navlink-item {
+  text-decoration: none;
+}
+
+.navlink-item .link-item {
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-family: "League Spartan", serif, sans-serif;
+  color: rgb(119, 119, 119);
+  padding: 8px 6px;
+}
+
+.navlink-item .link-item:hover {
+  color: #28a9c0;
+  cursor: pointer;
+}
+
+.content-container {
+    flex: 1;
+}
+
+.my-navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.my-navbar-actions .action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.my-navbar-actions .action-btn.login {
+    background: #7a37f7;
+    border: 1px solid #7a37f7;
+    color: #FFFFFF;
+}
+
+.my-navbar-actions .action-btn.login:hover {
+    background: #5e1cd7;
+    border: 1px solid #5e1cd7;
+}
+
+.my-navbar-actions .action-btn.register {
+    background: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.my-navbar-actions .action-btn.register:hover {
+    background: #e7e7e7;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+    gap: 54px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: lowercase;
+    color: #02306e;
+}
+
+.detail-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    gap: 25px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container .item-image {
+    width: 500px;
+    height: 500px;
+}
+
+.detail-content .article-name {
+    text-transform: lowercase;
+    color: #0097b2;
+}
+
+.item-details .item-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgb(119, 119, 119);
+    padding: 4px 0;
+}
+
+.item-info .info-label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.rent-btn {
+    text-decoration: none;
+    text-transform: lowercase;
+    padding: 8px 12px;
+    font-size: 21px;
+    font-weight: 500;
+    background: #7a37f7;
+    border-radius: 8px;
+    color: #FFFFFF;
+    width: fit-content;
+}
+
+.rent-btn:hover {
+    background: #5e1cd7;
+    color: #FFFFFF;
+}
+
+.rent-login-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+.about-section, .contact-section, .privacy-section {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0097b2;
+    margin-bottom: 16px;
+}
+
+.section-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgb(119, 119, 119);
+    margin-bottom: 16px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: black;
+    margin-bottom: 8px;
+}
+
+.policy-link {
+    color: #0097b2;
+    text-decoration: none;
+}
+
+.policy-link:hover {
+    text-decoration: underline;
+}

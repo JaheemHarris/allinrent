@@ -1,0 +1,91 @@
+﻿@page
+@model RazorAllinRent.Pages.Stocks.IndexModel
+
+@{
+    ViewData["Title"] = "Etat stock";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Etat du stock</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Stock</a></li>
+                <li class="breadcrumb-item active">Etat</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Etat du stock</h5>
+                        <div class="row justify-content-center">
+                            <form class="col-10 d-flex justify-content-evenly align-baseline" method="GET">
+                                <div class="d-flex flex-column">
+                                    <label for="search" class="form-label">Recherche</label>
+                                    <input id="search" type="text" name="q" class="form-control" placeholder="Rechercher par nom d'article..." value="@Model.PaginatedResult.SearchCriteria" />
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <label asp-for="@Model.StatusDate" class="form-label">Date</label>
+                                    <input asp-for="@Model.StatusDate" type="date" class="form-control" />
+                                </div>
+                                <div class="d-flex align-baseline">
+                                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <div class="d-flex justify-content-end">
+                            <a class="btn btn-primary" asp-page="./Export" asp-route-q="@Model.PaginatedResult.SearchCriteria" asp-route-statusDate="@Model.StatusDate?.ToString("yyyy-MM-dd")">Exporter PDF</a>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.PaginatedResult.Items[0].ItemName)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.PaginatedResult.Items[0].Quantity)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.PaginatedResult.Items[0].LastUpdateDate)</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PaginatedResult.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ItemName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                                        </td>
+                                        <td>
+                                            <a asp-page="./Edit" asp-route-id="@item.ItemId">Modifier</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+                        <nav aria-label="Pagination">
+                            <ul class="pagination justify-content-center">
+                                @for (var pageNum = 1; pageNum <= Math.Ceiling((decimal)Model.PaginatedResult.TotalCount / Model.PaginatedResult.PageSize); pageNum++)
+                                {
+                                    var isActive = pageNum == Model.PaginatedResult.PageIndex ? "active" : "";
+                                    <li class="page-item @isActive">
+                                        <a class="page-link" asp-page="./Index" asp-route-pageNumber="@pageNum" asp-route-statusDate="@Model.StatusDate?.ToString("yyyy-MM-dd")" asp-route-action="@Model.PaginatedResult.SearchCriteria">@pageNum</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- End #main -->
